@@ -1,0 +1,20 @@
+
+####
+#### Compilation
+####
+make: rien à faire pour « bin/ ».
+
+####
+#### Execution erreur
+####
+valgrind: ./bin/: is a directory
+
+####
+#### Execution erreur 2
+####
+valgrind: ./bin/: is a directory
+
+####
+#### Execution erreur 3
+####
+valgrind: ./bin/: is a directory
