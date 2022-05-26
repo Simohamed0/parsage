@@ -9,7 +9,7 @@
 #define INF 999999999
 #define NBR_NODE 2000000
 
-#define MAX_EDGE 10000
+#define MAX_EDGE 1000
 
 
  

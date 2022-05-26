@@ -13,15 +13,15 @@
 
 int main(int argc, char *argv[]){
     
-    if(argc != 3){
+    if(argc != 4){
         printf("Usage: %s <input_file> <output_file> <output_file2>\n", argv[0]);
         return 1;
     }
 
     FILE *input_file = fopen(argv[1], "r");
     FILE *output_file = fopen(argv[2], "w");
-    //FILE *output_file_2 = fopen(argv[3], "w");
-    if (input_file == NULL || output_file == NULL){
+    FILE *output_file_2 = fopen(argv[3], "w");
+    if (input_file == NULL || output_file == NULL || output_file_2 == NULL){
         printf("Error opening file\n");
         return 1;
     }
@@ -34,52 +34,53 @@ int main(int argc, char *argv[]){
     }
     parse_csv(input_file, output_file, tab_tree);
     
+
+
+    Edge **graph = malloc((MAX_EDGE)*sizeof(Edge*));
+    if(graph == NULL){
+        printf("Error allocating memory\n");
+        return 1;
+    }
     
+    for(int i = 0; i < MAX_EDGE; i++){
+        graph[i] = malloc(MAX_EDGE*sizeof(Edge));
+        if(graph[i] == NULL){
+            printf("Error allocating memory\n");
+            return 1;
+        }
+    }
+        
+    for (int i = 0; i < MAX_EDGE; i++) {
+        for (int j = 0; j < MAX_EDGE; j++) {
+            
+            graph[i][j].node_id = tab_tree[i].id;
+            graph[i][j].node_adj_id = tab_tree[j].id;
+            graph[i][j].distance = distance(tab_tree[i].x, tab_tree[j].x, tab_tree[i].y, tab_tree[j].y);
+            
+            if( i == j ) {
+                graph[i][j].distance = 0;
+            }
+        }
+    }
+
+    for (int i = 0; i < MAX_EDGE; i++){
+        for(int j = 0; j < MAX_EDGE; j++){
+            printf("%d %d %f\n", graph[i][j].node_id, graph[i][j].node_adj_id, graph[i][j].distance);
+        }
+        printf("\n");
+    }
     
-    //Edge **graph = malloc((MAX_EDGE)*sizeof(Edge*));
-    //if(graph == NULL){
-    //    printf("Error allocating memory\n");
-    //    return 1;
-    //}
-    //
-    //for(int i = 0; i < MAX_EDGE; i++){
-    //    graph[i] = malloc(MAX_EDGE*sizeof(Edge));
-    //    if(graph[i] == NULL){
-    //        printf("Error allocating memory\n");
-    //        return 1;
-    //    }
-    //}
-    //    
-    //for (int i = 0; i < MAX_EDGE; i++){
-    //    for (int j = 0; j < MAX_EDGE; j++){
-    //        graph[i][j].node_id = tab_tree[i].id;
-    //        graph[i][j].node_adj_id = tab_tree[j].id;
-    //        graph[i][j].distance = distance(tab_tree[i].x, tab_tree[j].x, tab_tree[i].y, tab_tree[j].y);
-    //        
-    //        if( i == j ){
-    //            graph[i][j].distance = 0;
-    //        }
-    //    }
-    //}
-//
-    //primMST(graph,output_file_2);
-    //for (int i = 0; i < NBR_NODE; i++){
-    //    for(int j = 0; j < NBR_NODE; j++){
-    //        printf("%d %d %f\n", graph[i][j].node_id, graph[i][j].node_adj_id, graph[i][j].distance);
-    //    }
-    //    printf("\n");
-    //}
-    
+    primMST(graph,output_file_2);
        
 
-    //for (int i = 0; i < NBR_NODE; i++)
-    //    free(graph[i]);
-    // 
-    //free(graph);
+    for (int i = 0; i < MAX_EDGE; i++)
+        free(graph[i]);
+     
+    free(graph);
     free(tab_tree);
     fclose(input_file);
     fclose(output_file);
-
+    fclose(output_file_2);
     return 0;
 }
 //

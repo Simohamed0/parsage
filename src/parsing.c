@@ -77,7 +77,7 @@ void parse_csv(FILE *src, FILE *dst, TreeNode *tab_tree){
         
         token2 = strtok(NULL,",");
         
-        //erase_char(token2,'.');
+        erase_char(token2,'.');
         char new_y[20];
         string_insert(token2,new_y,'.',7);
       
