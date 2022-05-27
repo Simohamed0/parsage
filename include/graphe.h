@@ -7,9 +7,9 @@
 #include "parsing.h"
 
 #define INF 999999999
-#define NBR_NODE 2000000
+#define NBR_NODE 300000
 
-#define MAX_EDGE 10000
+#define MAX_EDGE 50000
 
  
 typedef struct TreeNode{

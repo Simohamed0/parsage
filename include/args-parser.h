@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <inttypes.h>
 
+
+
 typedef enum action_t {
     ACTION_UNKNOWN,
     ACTION_MST,
@@ -21,6 +23,7 @@ typedef struct options_t {
     FILE *inputFile;
     FILE *outputFile;
 } options_t;
+
 
 void parseArgs(int argc, char **argv, options_t *options);
 

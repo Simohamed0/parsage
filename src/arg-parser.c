@@ -1,5 +1,4 @@
 
-
 #include "args-parser.h"
 
 #include <ctype.h>
@@ -34,7 +33,7 @@ void checkOptionsValidity(options_t *options) {
     
     if(options->action == ACTION_MST) {
 
-        fprintf(stderr, "encode action requires an input and output file\n");
+        fprintf(stderr, "MST action requires an input and output file\n");
         exit(1);
         
     } else {
@@ -53,9 +52,10 @@ void print_usage(void)
     printf("\n"
     "options:\n"
     "\t-i FICHIER    indiquer le fichier csv a ouvrir\n"
-    "\t-o FICHIER    indiquer le fichier ou est sauvegarder le résultat\n"
+    "\t-o FICHIER    indiquer le fichier ou sauvegarder le résultat\n"
     "\t-p            MST\n"
     "\t-h            for help \n"
+    "\t-d            Djikstra \n"
     "exemlpe\n"
     "./tree data_test.csv output.txt\n");
 }
@@ -67,7 +67,7 @@ void parseArgs(int argc,  char **argv, options_t *options) {
     initOptions(options);
 
     int c;
-    while ((c = getopt (argc, argv, "hedf:i:o:m:")) != -1) 
+    while ((c = getopt (argc, argv, "hpi:o:m:")) != -1) 
     {
         switch (c)
         {

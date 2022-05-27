@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 
 #include "../include/parsing.h"
 #include "../include/graphe.h"
@@ -27,7 +28,7 @@ int main(int argc, char *argv[]){
     }
     
     // NBR_NODE nodes stored in the tab_tree structure
-    TreeNode *tab_tree = malloc((NBR_NODE+1)*sizeof(TreeNode));
+    TreeNode *tab_tree = malloc((NBR_NODE)*sizeof(TreeNode));
     if (tab_tree == NULL){
         printf("Error allocating memory\n");
         return 1;
@@ -36,83 +37,57 @@ int main(int argc, char *argv[]){
     
 
 
-    Edge **graph = malloc((MAX_EDGE)*sizeof(Edge*));
-    if(graph == NULL){
-        printf("Error allocating memory\n");
-        return 1;
-    }
-    
-    for(int i = 0; i < MAX_EDGE; i++){
-        graph[i] = malloc(MAX_EDGE*sizeof(Edge));
-        if(graph[i] == NULL){
-            printf("Error allocating memory\n");
-            return 1;
-        }
-    }
-        
-    for (int i = 0; i < MAX_EDGE; i++) {
-        for (int j = 0; j < MAX_EDGE; j++) {
-            
-            graph[i][j].node_id = tab_tree[i].id;
-            graph[i][j].node_adj_id = tab_tree[j].id;
-            graph[i][j].distance = distance(tab_tree[i].x, tab_tree[j].x, tab_tree[i].y, tab_tree[j].y);
-            
-            if( i == j ) {
-                graph[i][j].distance = 0;
-            }
-        }
-    }
+    //Edge **graph = malloc((MAX_EDGE)*sizeof(Edge*));
+    //if(graph == NULL){
+    //    printf("Error allocating memory\n");
+    //    return 1;
+    //}
+    //
+    //for(int i = 0; i < MAX_EDGE; i++){
+    //    graph[i] = malloc(MAX_EDGE*sizeof(Edge));
+    //    if(graph[i] == NULL){
+    //        printf("Error allocating memory\n");
+    //        return 1;
+    //    }
+    //}
+    //    
+    //for (int i = 0; i < MAX_EDGE; i++) {
+    //    for (int j = 0; j < MAX_EDGE; j++) {
+    //        
+    //        graph[i][j].node_id = tab_tree[i].id;
+    //        graph[i][j].node_adj_id = tab_tree[j].id;
+    //        graph[i][j].distance = distance(tab_tree[i].x, tab_tree[j].x, tab_tree[i].y, tab_tree[j].y);
+    //        
+    //        if( i == j ) {
+    //            graph[i][j].distance = 0;
+    //        }
+    //    }
+    //}
 
-    for (int i = 0; i < MAX_EDGE; i++){
-        for(int j = 0; j < MAX_EDGE; j++){
-            printf("%d %d %f\n", graph[i][j].node_id, graph[i][j].node_adj_id, graph[i][j].distance);
-        }
-        printf("\n");
-    }
+    //for (int i = 0; i < MAX_EDGE; i++){
+    //    for(int j = 0; j < MAX_EDGE; j++){
+    //        printf("%d %d %f\n", graph[i][j].node_id, graph[i][j].node_adj_id, graph[i][j].distance);
+    //    }
+    //    printf("\n");
+    //}
     
-    primMST(graph,output_file_2,tab_tree);
+    primMST(tab_tree,output_file_2);
        
 
-    for (int i = 0; i < MAX_EDGE; i++)
-        free(graph[i]);
-     
-    free(graph);
+    //for (int i = 0; i < MAX_EDGE; i++)
+    //    free(graph[i]);
+    // 
+    //free(graph);
     free(tab_tree);
     fclose(input_file);
     fclose(output_file);
     fclose(output_file_2);
     return 0;
 }
-//
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include "types.h"
-//#include "args-parser.h"
-//#include "io-utils.h"
-//#include "encoder.h"
+
 //
 //
-//int actionDecode(options_t *options) {
-//
-//    char * message = NULL;
-//    uint64_t length = 0;
-//
-//    int exitCode = decode(
-//            options->inputFile, 
-//            &message,
-//            &length);
-//
-//    if(exitCode == ENCODER_OK)
-//    {
-//        fwrite(message, 1, length, stdout);
-//        free(message);
-//    } 
-//    else 
-//    {
-//        fprintf(stderr, "error while decoding %i\n", exitCode);
-//    }
-//    return exitCode;
-//}
+
 //
 //int actionEncode(options_t *options) {
 //    
@@ -162,18 +137,6 @@ int main(int argc, char *argv[]){
 //    cleanOptions(&options);
 //    return exitCode;
 //}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

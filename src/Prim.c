@@ -22,12 +22,14 @@ int minKey(int *key, int *mstSet)
 
 // A utility function to print the
 // constructed MST stored in parent[]
-void printMST(int *parent,int *parent_aux, Edge **graph, FILE *fd)
+void printMST(int *parent,int *parent_aux, TreeNode *tab_tree, FILE *fd)
 {
     fprintf(fd,"Edge\t\t\t\tWeight\n");
     for (int i = 1; i < MAX_EDGE  ; i++)
-        if ( parent[i] != 0 && graph[i][0].node_id != 0 )
-            fprintf(fd,"%d - %d \t%lf \n", parent[i], graph[i][0].node_id , graph[parent_aux[i]][i].distance);
+        if ( parent[i] != 0 && tab_tree->id != 0 ){
+            double dis = distance(tab_tree[i].x,tab_tree[parent_aux[i]].x,tab_tree[i].y,tab_tree[parent_aux[i]].y);
+			fprintf(fd,"%d - %d \t%lf \n", parent[i], tab_tree->id , dis);
+		}
 }
 
 // Function to construct and print MST for a graph represented using adjacency matrix representation
@@ -41,7 +43,7 @@ void printMST(int *parent,int *parent_aux, Edge **graph, FILE *fd)
 *
 * @return : The minimum spanning tree
 */
-void primMST(Edge **graph,FILE *fd, TreeNode *tab_tree)
+void primMST(TreeNode *tab_tree, FILE *fd)
 {
 	// Array to store constructed MST
 	int *parent = calloc(MAX_EDGE,sizeof(int));
@@ -95,12 +97,11 @@ void primMST(Edge **graph,FILE *fd, TreeNode *tab_tree)
 			// Update the key only if graph[u][v] is smaller than key[v]
 			if (dis && mstSet[v] == false && dis < key[v])
 			{
-				parent[v] = graph[u][v].node_id;
+				parent[v] = tab_tree[u].id;
 				parent_aux[v] = u;
 				key[v] = dis;
 			}
 		}
 	}
-
-	printMST(parent,parent_aux,graph,fd);
+	printMST(parent,parent_aux,tab_tree,fd);
 }
