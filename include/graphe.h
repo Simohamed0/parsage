@@ -9,8 +9,7 @@
 #define INF 999999999
 #define NBR_NODE 2000000
 
-#define MAX_EDGE 1000
-
+#define MAX_EDGE 10000
 
  
 typedef struct TreeNode{
@@ -21,7 +20,6 @@ typedef struct TreeNode{
 
 }TreeNode;
 
-
 // Data structure to store an edge in the 
 typedef struct Edge{
 
@@ -29,11 +27,6 @@ typedef struct Edge{
     int node_adj_id;
     double distance;
 }Edge;
-
-
-
-
-
 
 /**
  * @brief erase the fisrt char c from the string
@@ -94,15 +87,7 @@ void parse_csv(FILE *src, FILE *dst , TreeNode *tab_tree);
 // */
 //void DeleteGraph(Graph *graph);
 
-/** This function is used to find the minimum spanning tree
-* of the graph.
-*
-* @param graph : The graph to find the minimum spanning tree
-* @param tree_id : The id of the tree to start with 
-*
-* @return : The minimum spanning tree
-*/
-int Prim_matrix(Edge **graph, int tree_id);
+
 
 
 

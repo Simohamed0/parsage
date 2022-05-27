@@ -41,7 +41,7 @@ void printMST(int *parent,int *parent_aux, Edge **graph, FILE *fd)
 *
 * @return : The minimum spanning tree
 */
-void primMST(Edge **graph,FILE *fd)
+void primMST(Edge **graph,FILE *fd, TreeNode *tab_tree)
 {
 	// Array to store constructed MST
 	int *parent = calloc(MAX_EDGE,sizeof(int));
@@ -59,12 +59,14 @@ void primMST(Edge **graph,FILE *fd)
         key[i] = INT_MAX ;
         mstSet[i] = 0;
     }
-	
+
 	// Always include first 1st vertex in MST.
 	// Make key 0 so that this vertex is picked as first vertex.
 	key[0] = 0;
 	parent[0] = -1; // First node is always root of MST
 	parent_aux[0] = -1;
+
+	double dis = 0.0;
 
 	// The MST will have V vertices
 	for (int count = 0; count < MAX_EDGE - 1; count++) {
@@ -80,16 +82,24 @@ void primMST(Edge **graph,FILE *fd)
 		// Consider only those vertices which are not
 		// yet included in MST
 		for (int v = 0; v < MAX_EDGE; v++)
-
+		{
+	
+			if( u == v ) {
+				dis = 0;
+			}
+			else {
+				dis = distance(tab_tree[u].x, tab_tree[v].x, tab_tree[u].y, tab_tree[v].y);
+			}
 			// graph[u][v] is non zero only for adjacent vertices of m
 			// mstSet[v] is false for vertices not yet included in MST
 			// Update the key only if graph[u][v] is smaller than key[v]
-			if (graph[u][v].distance && mstSet[v] == false && graph[u][v].distance < key[v])
+			if (dis && mstSet[v] == false && dis < key[v])
 			{
 				parent[v] = graph[u][v].node_id;
 				parent_aux[v] = u;
-				key[v] = graph[u][v].distance;
+				key[v] = dis;
 			}
+		}
 	}
 
 	printMST(parent,parent_aux,graph,fd);

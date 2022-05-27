@@ -10,8 +10,8 @@ int minKey(int *key, int *mstSet);
 
 void printMST(int *parent,int *parent_aux,  Edge **graph,FILE *fd);
 
-void primMST(Edge **graph,FILE *fd);
-
+void primMST(Edge **graph,FILE *fd, TreeNode *tab_tree);
+ 
 
 // A C program for Prim's Minimum
 // Spanning Tree (MST) algorithm. The program is

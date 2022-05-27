@@ -70,7 +70,7 @@ int main(int argc, char *argv[]){
         printf("\n");
     }
     
-    primMST(graph,output_file_2);
+    primMST(graph,output_file_2,tab_tree);
        
 
     for (int i = 0; i < MAX_EDGE; i++)
