@@ -2,8 +2,6 @@
 // Number of vertices in the graph
 
 
-
-
 // A utility function to find the vertex with
 // minimum key value, from the set of vertices
 // not yet included in MST
@@ -12,7 +10,7 @@ int minKey(int *key, int *mstSet)
 	// Initialize min value
 	int min = INT_MAX, min_index;
 
-	for (int v = 0; v < MAX_EDGE; v++)
+	for (int v = 0; v < MAX_EDGE-1; v++)
 		if (mstSet[v] == 0 && key[v] < min)
 			min = key[v], min_index = v;
 
@@ -22,17 +20,17 @@ int minKey(int *key, int *mstSet)
 
 // A utility function to print the
 // constructed MST stored in parent[]
-void printMST(int *parent,int *parent_aux, TreeNode *tab_tree, FILE *fd)
-{
+void printMST(int *parent,int *parent_aux, TreeNode *tab_tree, FILE *fd) {
     fprintf(fd,"Edge\t\t\t\tWeight\n");
-    for (int i = 1; i < MAX_EDGE  ; i++)
+    for (int i = 1; i < MAX_EDGE - 1  ; i++)
         if ( parent[i] != 0 && tab_tree->id != 0 ){
             double dis = distance(tab_tree[i].x,tab_tree[parent_aux[i]].x,tab_tree[i].y,tab_tree[parent_aux[i]].y);
-			fprintf(fd,"%d - %d \t%lf \n", parent[i], tab_tree->id , dis);
+			fprintf(fd,"%d - %d \t%lf \n", parent[i], tab_tree[i].id , dis);
 		}
 }
 
 // Function to construct and print MST for a graph represented using adjacency matrix representation
+
 
 
 /** This function is used to find the minimum spanning tree
@@ -83,7 +81,7 @@ void primMST(TreeNode *tab_tree, FILE *fd)
 		// the adjacent vertices of the picked vertex.
 		// Consider only those vertices which are not
 		// yet included in MST
-		for (int v = 0; v < MAX_EDGE; v++)
+		for (int v = 0; v < MAX_EDGE ; v++)
 		{
 	
 			if( u == v ) {
@@ -104,4 +102,9 @@ void primMST(TreeNode *tab_tree, FILE *fd)
 		}
 	}
 	printMST(parent,parent_aux,tab_tree,fd);
+	
+	free(parent);
+	free(parent_aux);
+	free(key);
+	free(mstSet);
 }

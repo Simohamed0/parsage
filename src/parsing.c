@@ -5,9 +5,6 @@ const char *separator = ";";
 
 
 
-
-
-
 void erase_char(char *string, char x){
     
     int p ,i;

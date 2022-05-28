@@ -2,19 +2,29 @@
 ####
 #### Compilation
 ####
-make: rien à faire pour « bin/ ».
+mkdir -p obj
+gcc -o obj/lib.o -c src/lib.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/arg-parser.o -c src/arg-parser.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/parsing.o -c src/parsing.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/graphe.o -c src/graphe.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/main.o -c src/main.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/Prim.o -c src/Prim.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/djikstra.o -c src/djikstra.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p bin
+gcc -o bin/tree obj/lib.o obj/arg-parser.o obj/parsing.o obj/graphe.o obj/main.o obj/Prim.o obj/djikstra.o -Wall -Wextra -Werror -Wformat -g  -lm 
+Linking complete!
 
 ####
-#### Execution erreur
+#### Test 1  parsage 
 ####
-valgrind: ./bin/: is a directory
+===DIFF===
 
 ####
-#### Execution erreur 2
+#### Test 2
 ####
-valgrind: ./bin/: is a directory
-
-####
-#### Execution erreur 3
-####
-valgrind: ./bin/: is a directory

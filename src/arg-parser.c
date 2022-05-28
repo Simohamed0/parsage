@@ -32,14 +32,16 @@ void initOptions(options_t *options) {
 void checkOptionsValidity(options_t *options) {
     
     if(options->action == ACTION_MST) {
+        if(options->inputFilename == NULL 
+        || options->outputFilename== NULL) {
+            fprintf(stderr, "MST action requires an input and output file\n");
+            exit(1);
+        }
 
-        fprintf(stderr, "MST action requires an input and output file\n");
-        exit(1);
-        
     } else {
 
         if(options->inputFilename == NULL) {
-            fprintf(stderr, "encode action requires an input file.\n");
+            fprintf(stderr, "MST action requires an input file.\n");
             exit(2);
         }
     }
