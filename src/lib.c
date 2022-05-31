@@ -8,6 +8,7 @@ void permuter(int *a, int *b) {
     *a = *b;
     *b = tmp;
 }
+
 void triRapid(int tab[], int first, int last) {
     int pivot, i, j;
     if(first < last) {

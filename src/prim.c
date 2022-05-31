@@ -1,5 +1,8 @@
-#include "../include/prim.h"
-// Number of vertices in the graph
+#include "prim.h"
+#include "args-parser.h"
+
+
+
 
 
 // A utility function to find the vertex with
@@ -41,7 +44,7 @@ void printMST(int *parent,int *parent_aux, TreeNode *tab_tree, FILE *fd) {
 *
 * @return : The minimum spanning tree
 */
-void primMST(TreeNode *tab_tree, FILE *fd)
+int primMST(TreeNode *tab_tree, FILE *fd)
 {
 	// Array to store constructed MST
 	int *parent = calloc(MAX_EDGE,sizeof(int));
@@ -107,4 +110,6 @@ void primMST(TreeNode *tab_tree, FILE *fd)
 	free(parent_aux);
 	free(key);
 	free(mstSet);
+
+	return PARSAGE_OK;
 }

@@ -8,33 +8,73 @@
 #include "../include/graphe.h"
 #include "../include/lib.h"
 #include "../include/prim.h"
+#include "../include/io-utils.h"
+#include "../include/args-parser.h"
+
 
 
 
 
 int main(int argc, char *argv[]){
     
-    if(argc != 4){
-        printf("Usage: %s <input_file> <output_file> <output_file2>\n", argv[0]);
-        return 1;
+    
+    
+    int exitCode = EXIT_SUCCESS;
+    options_t options;
+    
+    parseArgs(argc, argv, &options);
+    
+
+    if(0 != (exitCode = openFiles(&options))) {
+        goto quit;
+    }
+       
+    exitCode = parse_csv(options.inputFile, options.outputFile, options.tree_tab);
+
+    switch(options.action) {
+        
+        case ACTION_MST: 
+            exitCode = primMST(options.tree_tab, options.outputFile);
+            break;
+        case ACTION_UNKNOWN:
+            fprintf(stderr, "action is missing\n");
+            exitCode = 4;
     }
 
-    FILE *input_file = fopen(argv[1], "r");
-    FILE *output_file = fopen(argv[2], "w");
-    FILE *output_file_2 = fopen(argv[3], "w");
-    if (input_file == NULL || output_file == NULL || output_file_2 == NULL){
-        printf("Error opening file\n");
-        return 1;
-    }
+
     
-    // NBR_NODE nodes stored in the tab_tree structure
-    TreeNode *tab_tree = malloc((NBR_NODE)*sizeof(TreeNode));
-    if (tab_tree == NULL){
-        printf("Error allocating memory\n");
-        return 1;
-    }
-    parse_csv(input_file, output_file, tab_tree);
-    
+    quit:
+    cleanOptions(&options);
+
+    return 0;
+}
+
+//
+//
+
+//
+
+//
+//int main(int argc, char **argv) {
+//    
+
+//
+
+//
+//    
+
+//
+//
+//    quit:
+//
+//    if(exitCode) 
+//        fprintf(stderr, "%s\n", errorToString(exitCode));
+//
+//    cleanOptions(&options);
+//    return exitCode;
+//}
+
+
 
 
     //Edge **graph = malloc((MAX_EDGE)*sizeof(Edge*));
@@ -71,73 +111,6 @@ int main(int argc, char *argv[]){
     //    printf("\n");
     //}
     
-    primMST(tab_tree,output_file_2);
-       
-
-    //for (int i = 0; i < MAX_EDGE; i++)
-    //    free(graph[i]);
-    // 
-    //free(graph);
-    free(tab_tree);
-    fclose(input_file);
-    fclose(output_file);
-    fclose(output_file_2);
-    return 0;
-}
-
-//
-//
-
-//
-//int actionEncode(options_t *options) {
-//    
-//    int exitCode = encode(
-//        options->outputFile, 
-//        options->messageToEncode,
-//        options->messageLength,
-//        options->compressionFactor); 
-//    if(exitCode != ENCODER_OK) 
-//    {
-//        fprintf(stderr, "error while encoding %i\n", exitCode);
-//    }
-//    return exitCode;
-//}
-//
-//int main(int argc, char **argv) {
-//    
-//    int exitCode = 0;
-//
-//    options_t options;
-//    
-//    parseArgs(argc, argv, &options);
-//
-//    if(ENCODER_OK != (exitCode = openFiles(&options))) {
-//        goto quit;
-//    }
-//
-//    
-//    switch(options.action) {
-//        case ACTION_DECODE: 
-//            exitCode = actionDecode(&options);
-//            break;
-//        case ACTION_ENCODE:
-//            exitCode = actionEncode(&options);
-//            break;
-//        case ACTION_UNKNOWN:
-//            fprintf(stderr, "action is missing\n");
-//            exitCode = 4;
-//    }
-//
-//
-//    quit:
-//
-//    if(exitCode) 
-//        fprintf(stderr, "%s\n", errorToString(exitCode));
-//
-//    cleanOptions(&options);
-//    return exitCode;
-//}
-
 
 
 /**

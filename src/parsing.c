@@ -1,6 +1,7 @@
 #include "../include/parsing.h"
 
 
+
 const char *separator = ";";
 
 
@@ -41,7 +42,7 @@ void string_insert(char *src,char *dst ,char x, int loc){
 }
 
 
-void parse_csv(FILE *src, FILE *dst, TreeNode *tab_tree){
+int parse_csv(FILE *src, FILE *dst, TreeNode *tab_tree){
 
     char row[3000];
     char *id = "";    
@@ -85,6 +86,8 @@ void parse_csv(FILE *src, FILE *dst, TreeNode *tab_tree){
         fprintf(dst,"  %lf",tab_tree[i].y);
         i++;
     }
+
+    return PARSAGE_OK;
 }
 
 

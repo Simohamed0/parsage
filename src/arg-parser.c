@@ -1,4 +1,3 @@
-
 #include "args-parser.h"
 
 #include <ctype.h>
@@ -13,8 +12,11 @@ void cleanOptions(options_t *options) {
 
     if(options->inputFile)
         fclose(options->inputFile);
+    
     if(options->outputFile)
         fclose(options->outputFile);
+
+    free(options->tree_tab);
 }
 
 
@@ -26,15 +28,19 @@ void initOptions(options_t *options) {
     options->outputFilename = NULL;
     options->inputFile = NULL;
     options->outputFile = NULL;
- 
+    options->tree_tab = malloc(NBR_NODE * sizeof(TreeNode));
+    if ( !options->tree_tab ) {
+        
+        fprintf(stderr, "Error: malloc failed for tree_tab\n");
+        exit(EXIT_FAILURE);
+    }
 }
 
 void checkOptionsValidity(options_t *options) {
     
     if(options->action == ACTION_MST) {
-        if(options->inputFilename == NULL 
-        || options->outputFilename== NULL) {
-            fprintf(stderr, "MST action requires an input and output file\n");
+        if(options->inputFilename == NULL || options->outputFilename== NULL) {
+            fprintf(stderr, "MST action requires an input to parse and output file to write the result\n");
             exit(1);
         }
 
@@ -53,13 +59,12 @@ void print_usage(void)
 {
     printf("\n"
     "options:\n"
-    "\t-i FICHIER    indiquer le fichier csv a ouvrir\n"
+    "\t-i FICHIER    indiquer le fichier csv à traiter\n"
     "\t-o FICHIER    indiquer le fichier ou sauvegarder le résultat\n"
     "\t-p            MST\n"
     "\t-h            for help \n"
-    "\t-d            Djikstra \n"
     "exemlpe\n"
-    "./tree data_test.csv output.txt\n");
+    "./tree les-arbres.csv output.txt\n");
 }
 
 
@@ -69,15 +74,12 @@ void parseArgs(int argc,  char **argv, options_t *options) {
     initOptions(options);
 
     int c;
-    while ((c = getopt (argc, argv, "hpi:o:m:")) != -1) 
+    while ((c = getopt (argc, argv, "hpi:o:")) != -1) 
     {
         switch (c)
         {
             case 'p':
                 options->action = ACTION_MST;
-                break;
-            case 'd':
-                options->action = ACTION_DIJKSTRA;
                 break;
             case 'i':
                 options->inputFilename = optarg;
@@ -104,10 +106,44 @@ void parseArgs(int argc,  char **argv, options_t *options) {
                         print_usage();
                 abort();
             default:
-                abort ();
+                abort();
         }
     }
 
     checkOptionsValidity(options);
     }
+}
+
+int action_parsage(options_t *options){
+    
+    int exitCode = 0;
+    parse_csv( options->inputFile, options->outputFile, options->tree_tab); 
+    
+    if(exitCode != PARSAGE_OK) 
+    {
+        fprintf(stderr, "error while parsing %i\n", exitCode);
+    }
+    return exitCode;
+}
+
+
+int openFiles(options_t *options) {
+    
+    int exitCode = 0;
+    
+    if(options->inputFilename) {
+        options->inputFile = fopen(options->inputFilename, "r");
+        if(!options->inputFile) {
+            fprintf(stderr, "error while opening input file %s\n", options->inputFilename);
+            exitCode = ERROR_OPENING_FILES;
+        }
+    }
+    if(options->outputFilename) {
+        options->outputFile = fopen(options->outputFilename, "w");
+        if(!options->outputFile) {
+            fprintf(stderr, "error while opening output file %s\n", options->outputFilename);
+            exitCode = ERROR_OPENING_FILES;
+        }
+    }
+    return exitCode;
 }

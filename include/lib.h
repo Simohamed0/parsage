@@ -37,14 +37,6 @@
 
 
 
-typedef enum error_type_t {
-    
-    PARSAGE_OK,
-    ERROR_OPENING_FILES,
-    
-} error_type_t;
-
-
 
 /**
  * @brief permuter deux entier
