@@ -21,15 +21,19 @@ int main(int argc, char *argv[]){
     
     int exitCode = EXIT_SUCCESS;
     options_t options;
-    
+    init_options(&options);
     parseArgs(argc, argv, &options);
     
 
     if(0 != (exitCode = openFiles(&options))) {
         goto quit;
     }
-       
+    
     exitCode = parse_csv(options.inputFile, options.outputFile, options.tree_tab);
+
+    if(exitCode != PARSAGE_OK) {
+        fprintf(stderr, "error while parsing %i\n", exitCode);
+    }
 
     switch(options.action) {
         
@@ -40,8 +44,6 @@ int main(int argc, char *argv[]){
             fprintf(stderr, "action is missing\n");
             exitCode = 4;
     }
-
-
     
     quit:
     cleanOptions(&options);

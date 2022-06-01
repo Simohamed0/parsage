@@ -21,20 +21,7 @@ void cleanOptions(options_t *options) {
 
 
 
-void initOptions(options_t *options) {
-    
-    options->action = ACTION_UNKNOWN;
-    options->inputFilename = NULL;
-    options->outputFilename = NULL;
-    options->inputFile = NULL;
-    options->outputFile = NULL;
-    options->tree_tab = malloc(NBR_NODE * sizeof(TreeNode));
-    if ( !options->tree_tab ) {
-        
-        fprintf(stderr, "Error: malloc failed for tree_tab\n");
-        exit(EXIT_FAILURE);
-    }
-}
+
 
 void checkOptionsValidity(options_t *options) {
     
@@ -71,7 +58,7 @@ void print_usage(void)
 void parseArgs(int argc,  char **argv, options_t *options) {
 
 
-    initOptions(options);
+    init_options(options);
 
     int c;
     while ((c = getopt (argc, argv, "hpi:o:")) != -1) 
@@ -146,4 +133,19 @@ int openFiles(options_t *options) {
         }
     }
     return exitCode;
+}
+
+void init_options(options_t *options){
+
+    options->action = ACTION_UNKNOWN;
+    options->inputFilename = NULL;
+    options->outputFilename = NULL;
+    options->inputFile = NULL;
+    options->outputFile = NULL;
+    options->tree_tab = malloc(NBR_NODE * sizeof(TreeNode));
+    if ( !options->tree_tab ) {
+             
+        fprintf(stderr, "Error: malloc failed for tree_tab\n");
+        exit(EXIT_FAILURE);
+    }
 }
