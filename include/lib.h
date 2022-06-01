@@ -14,6 +14,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include "parsing.h"
 
 
 #define RESET   "\033[0m"
@@ -51,6 +52,18 @@ void permuter(int *a, int *b);
  */
 void triRapid(int tab[], int first, int last);
 
+
+/**
+ * @brief fonction qui retourne l'indice d'un arbre donnée par son id
+ * 
+ */
+int treeIndex(TreeNode **tab_tree, int id);
+
+/**
+ * @brief fonction qui retourne ID du tableau
+ * 
+ */
+int treeId(TreeNode **tab_tree, int index);
 
 /**
  * @brief calculer la distance entre 2 points 2D

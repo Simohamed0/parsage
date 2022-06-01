@@ -20,9 +20,6 @@ void cleanOptions(options_t *options) {
 }
 
 
-
-
-
 void checkOptionsValidity(options_t *options) {
     
     if(options->action == ACTION_MST) {
@@ -63,6 +60,7 @@ void parseArgs(int argc,  char **argv, options_t *options) {
     int c;
     while ((c = getopt (argc, argv, "hpi:o:")) != -1) 
     {
+        options->action = ACTION_ONLY_PARSING;
         switch (c)
         {
             case 'p':
@@ -100,6 +98,7 @@ void parseArgs(int argc,  char **argv, options_t *options) {
     checkOptionsValidity(options);
     }
 }
+
 
 int action_parsage(options_t *options){
     
@@ -144,7 +143,7 @@ void init_options(options_t *options){
     options->outputFile = NULL;
     options->tree_tab = malloc(NBR_NODE * sizeof(TreeNode));
     if ( !options->tree_tab ) {
-             
+
         fprintf(stderr, "Error: malloc failed for tree_tab\n");
         exit(EXIT_FAILURE);
     }

@@ -13,8 +13,6 @@
 
 
 
-
-
 int main(int argc, char *argv[]){
     
     
@@ -40,12 +38,21 @@ int main(int argc, char *argv[]){
         case ACTION_MST: 
             exitCode = primMST(options.tree_tab, options.outputFile);
             break;
+        case ACTION_ONLY_PARSING:
+            exitCode = parse_csv(options.inputFile, options.outputFile, options.tree_tab);
+            break;
+        case ACTION_DJKSTRA:
+            //exitCode = djkstra(options.tree_tab, options.outputFile);
+            break;
         case ACTION_UNKNOWN:
             fprintf(stderr, "action is missing\n");
             exitCode = 4;
     }
     
     quit:
+    if(exitCode) 
+        //fprintf(stderr, "%s\n", errorToString(exitCode));
+    
     cleanOptions(&options);
 
     return 0;
@@ -69,8 +76,7 @@ int main(int argc, char *argv[]){
 //
 //    quit:
 //
-//    if(exitCode) 
-//        fprintf(stderr, "%s\n", errorToString(exitCode));
+
 //
 //    cleanOptions(&options);
 //    return exitCode;

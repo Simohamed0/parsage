@@ -6,11 +6,12 @@
 #include "io-utils.h"
 
 
-
 typedef enum action_t {
     
     ACTION_UNKNOWN,
-    ACTION_MST
+    ACTION_ONLY_PARSING,
+    ACTION_MST,
+    ACTION_DJKSTRA,
 } action_t;
 
 /**

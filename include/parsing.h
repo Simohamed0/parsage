@@ -6,7 +6,7 @@
 #include <string.h>
 #include "io-utils.h"
 
-#define NBR_NODE 205821
+#define NBR_NODE 10
 
 typedef struct TreeNode{
     
