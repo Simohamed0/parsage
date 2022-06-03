@@ -58,9 +58,8 @@ void parseArgs(int argc,  char **argv, options_t *options) {
     init_options(options);
 
     int c;
-    while ((c = getopt (argc, argv, "hpi:o:")) != -1) 
+    while ((c = getopt (argc, argv, "hpd:i:o:")) != -1) 
     {
-        options->action = ACTION_ONLY_PARSING;
         switch (c)
         {
             case 'p':
@@ -71,6 +70,10 @@ void parseArgs(int argc,  char **argv, options_t *options) {
                 break;
             case 'o':
                 options->outputFilename = optarg;
+                break;
+            case 'd':
+                options->action = ACTION_DJKSTRA;
+                options->src_tree = atoi(optarg);
                 break;
             case 'h':
                 print_usage(); 
@@ -102,8 +105,7 @@ void parseArgs(int argc,  char **argv, options_t *options) {
 
 int action_parsage(options_t *options){
     
-    int exitCode = 0;
-    parse_csv( options->inputFile, options->outputFile, options->tree_tab); 
+    int exitCode = parse_csv( options->inputFile, options->outputFile, options->tree_tab); 
     
     if(exitCode != PARSAGE_OK) 
     {

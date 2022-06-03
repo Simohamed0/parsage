@@ -16,12 +16,6 @@ rm -f "$LOG"
 touch "$LOG"
 
 #
-# Importer les fonctions communes à tous les tests
-#
-. ./fonctions.sh
-
-
-#
 # Compilation du programme.
 #
 annoncer "Compilation"
@@ -30,7 +24,7 @@ make $TARGET >> $LOG 2>&1 || fail
 coloredEcho "OK" green
 
 annoncer "Test 1  parsage "
-$VALGRIND ./$TARGET les-arbres.csv output.csv distance.csv 
+$VALGRIND ./$TARGET -i les-arbres.csv -o output.csv  
 echo "===DIFF===" >> $LOG
 diff -Z output.csv tests/test1/sortie_attendue >> $LOG 2>&1 
 if [ $? -ne 0 ]

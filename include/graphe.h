@@ -9,7 +9,7 @@
 #define INF 999999999
 
 
-#define MAX_EDGE 9
+#define MAX_EDGE 206000
  
 
 // Data structure to represent an edge in graph

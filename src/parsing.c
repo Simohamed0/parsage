@@ -50,17 +50,17 @@ int parse_csv(FILE *src, FILE *dst, TreeNode *tab_tree){
     
     int i = 0;
     fgets(row,3000,src); // first line is not relevant
-    //fseek(src,0,SEEK_SET);
+
     while ( fgets(row, 3000, src) != NULL )
     {
         // Extract the first token
         id = strtok(row, separator);
         tab_tree[i].id = atoi(id);
-        
+
         // iterate through the string to extract the last token
-        while( id!=NULL )
+        while( id != NULL )
         {
-            geo_point_2d= id;
+            geo_point_2d = id;
             id = strtok(NULL, separator);
         }
         
@@ -78,15 +78,15 @@ int parse_csv(FILE *src, FILE *dst, TreeNode *tab_tree){
         erase_char(token2,'.');
         char new_y[20];
         string_insert(token2,new_y,'.',7);
-      
+
         tab_tree[i].y = strtod(new_y,NULL);
-      
-        fprintf(dst,"\n%d", tab_tree[i].id);
+
+        fprintf(dst,"%d", tab_tree[i].id);
         fprintf(dst,"  %lf",tab_tree[i].x);
-        fprintf(dst,"  %lf",tab_tree[i].y);
+        fprintf(dst,"  %lf\n",tab_tree[i].y);
         i++;
     }
-
+    
     return PARSAGE_OK;
 }
 

@@ -1,19 +1,21 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/faid/parsage'
-mkdir -p obj
-gcc -o obj/Prim.o -c src/Prim.c -Wall -Wextra -Werror -Wformat -g  -I./include
-mkdir -p obj
-gcc -o obj/arg-parser.o -c src/arg-parser.c -Wall -Wextra -Werror -Wformat -g  -I./include
-mkdir -p obj
-gcc -o obj/graphe.o -c src/graphe.c -Wall -Wextra -Werror -Wformat -g  -I./include
+make: Entering directory '/home/aymane/parsage'
 mkdir -p obj
 gcc -o obj/lib.o -c src/lib.c -Wall -Wextra -Werror -Wformat -g  -I./include
 mkdir -p obj
-gcc -o obj/main.o -c src/main.c -Wall -Wextra -Werror -Wformat -g  -I./include
+gcc -o obj/arg-parser.o -c src/arg-parser.c -Wall -Wextra -Werror -Wformat -g  -I./include
 mkdir -p obj
 gcc -o obj/parsing.o -c src/parsing.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/graphe.o -c src/graphe.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/main.o -c src/main.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/prim.o -c src/prim.c -Wall -Wextra -Werror -Wformat -g  -I./include
+mkdir -p obj
+gcc -o obj/djikstra.o -c src/djikstra.c -Wall -Wextra -Werror -Wformat -g  -I./include
 mkdir -p bin
-gcc -o bin/tree obj/Prim.o obj/arg-parser.o obj/graphe.o obj/lib.o obj/main.o obj/parsing.o -Wall -Wextra -Werror -Wformat -g  -lm 
+gcc -o bin/tree obj/lib.o obj/arg-parser.o obj/parsing.o obj/graphe.o obj/main.o obj/prim.o obj/djikstra.o -Wall -Wextra -Werror -Wformat -g  -lm 
 echo "Linking complete!"
-make: Leaving directory '/home/faid/parsage'
+make: Leaving directory '/home/aymane/parsage'
  

@@ -9,9 +9,8 @@
 typedef enum action_t {
     
     ACTION_UNKNOWN,
-    ACTION_ONLY_PARSING,
     ACTION_MST,
-    ACTION_DJKSTRA,
+    ACTION_DJKSTRA
 } action_t;
 
 /**
@@ -21,6 +20,7 @@ typedef enum action_t {
 typedef struct options_t {
     
     action_t action;
+    int src_tree;
     char *inputFilename;
     char *outputFilename;
     FILE *inputFile;
@@ -45,7 +45,7 @@ void cleanOptions(options_t *options);
  * 
  * @param options 
  */
-int action_parse(options_t *options);
+int action_parsage(options_t *options);
 
 /**
  * @brief open the files and check the opening

@@ -35,18 +35,18 @@ double distance(double x1, double x2 , double y1, double y2) {
     return sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 }
 
-int treeIndex(TreeNode **tab_tree, int id) {
+int treeIndex(TreeNode *tab_tree, int id) {
     int i;
     for(i = 0; i < NBR_NODE; i++) {
-        if(tab_tree[i]->id == id) {
+        if(tab_tree[i].id == id) {
             return i;
         }
     }
     return -1;
 }
 
-int treeId(TreeNode **tab_tree, int index) {
-    return tab_tree[index]->id;
+int treeId(TreeNode *tab_tree, int index) {
+    return tab_tree[index].id;
 }
 
 

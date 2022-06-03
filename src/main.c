@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
-#include <time.h>
 
 #include "../include/parsing.h"
 #include "../include/graphe.h"
@@ -10,6 +9,7 @@
 #include "../include/prim.h"
 #include "../include/io-utils.h"
 #include "../include/args-parser.h"
+#include "../include/djikstra.h"
 
 
 
@@ -19,7 +19,6 @@ int main(int argc, char *argv[]){
     
     int exitCode = EXIT_SUCCESS;
     options_t options;
-    init_options(&options);
     parseArgs(argc, argv, &options);
     
 
@@ -27,30 +26,30 @@ int main(int argc, char *argv[]){
         goto quit;
     }
     
-    exitCode = parse_csv(options.inputFile, options.outputFile, options.tree_tab);
 
     if(exitCode != PARSAGE_OK) {
+        
         fprintf(stderr, "error while parsing %i\n", exitCode);
     }
 
+    action_parsage(&options);
+
     switch(options.action) {
-        
-        case ACTION_MST: 
+    
+        case ACTION_MST:
             exitCode = primMST(options.tree_tab, options.outputFile);
             break;
-        case ACTION_ONLY_PARSING:
-            exitCode = parse_csv(options.inputFile, options.outputFile, options.tree_tab);
-            break;
         case ACTION_DJKSTRA:
-            //exitCode = djkstra(options.tree_tab, options.outputFile);
+            Dijkstra(options.tree_tab, options.src_tree, options.outputFile);
             break;
         case ACTION_UNKNOWN:
             fprintf(stderr, "action is missing\n");
             exitCode = 4;
+            break;
     }
     
     quit:
-    if(exitCode) 
+    //if(exitCode) 
         //fprintf(stderr, "%s\n", errorToString(exitCode));
     
     cleanOptions(&options);

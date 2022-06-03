@@ -3,13 +3,11 @@
 
 
 
-
-
 // A utility function to find the vertex with
 // minimum key value, from the set of vertices
 // not yet included in MST
-int minKey(int *key, int *mstSet)
-{
+int minKey(int *key, int *mstSet) {
+	
 	// Initialize min value
 	int min = INT_MAX, min_index;
 
@@ -24,10 +22,12 @@ int minKey(int *key, int *mstSet)
 // A utility function to print the
 // constructed MST stored in parent[]
 void printMST(int *parent,int *parent_aux, TreeNode *tab_tree, FILE *fd) {
-    fprintf(fd,"Edge\t\t\t\tWeight\n");
+    
+	fprintf(fd,"Edge\t\t\t\tWeight\n");
     for (int i = 1; i < MAX_EDGE - 1  ; i++)
-        if ( parent[i] != 0 && tab_tree->id != 0 ){
-            double dis = distance(tab_tree[i].x,tab_tree[parent_aux[i]].x,tab_tree[i].y,tab_tree[parent_aux[i]].y);
+        if ( parent[i] != 0 && tab_tree[i].id > 0 )
+		{    
+			double dis = distance(tab_tree[i].x,tab_tree[parent_aux[i]].x,tab_tree[i].y,tab_tree[parent_aux[i]].y);
 			fprintf(fd,"%d - %d \t%lf \n", parent[i], tab_tree[i].id , dis);
 		}
 }
