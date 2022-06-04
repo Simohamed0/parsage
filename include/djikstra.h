@@ -5,4 +5,4 @@
 #include "lib.h"
 
 
-void Dijkstra(TreeNode *Graph, int startID, FILE *file);
+void Dijkstra(TreeNode *Graph, int startID, FILE *file ,int nbr_node);

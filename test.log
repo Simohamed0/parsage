@@ -21,12 +21,20 @@ gcc -o bin/tree obj/lib.o obj/arg-parser.o obj/parsing.o obj/graphe.o obj/main.o
 Linking complete!
 
 ####
-#### Test 1  parsage 
+#### Test 1  parsage du fichier 
 ####
 ===DIFF===
 
 ####
-#### Test 2
+#### Test 2 prim sur data_test
 ####
 ===DIFF===
-diff: tests/test2/sortieAttendueTest2: Aucun fichier ou dossier de ce type
+
+####
+#### Test 3 djikstra from source 3
+####
+===DIFF===
+
+####
+#### Test 4 prim sur tout le fichier un peu long..
+####

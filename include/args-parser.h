@@ -21,6 +21,7 @@ typedef struct options_t {
     
     action_t action;
     int src_tree;
+    int dst_tree;
     char *inputFilename;
     char *outputFilename;
     FILE *inputFile;

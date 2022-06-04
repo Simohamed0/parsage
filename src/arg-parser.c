@@ -46,9 +46,11 @@ void print_usage(void)
     "\t-i FICHIER    indiquer le fichier csv à traiter\n"
     "\t-o FICHIER    indiquer le fichier ou sauvegarder le résultat\n"
     "\t-p            MST\n"
+    "\t-d src_index  Djikstra \n"
+    "\t-t dst_index  Djikstra \n"         
     "\t-h            for help \n"
     "exemlpe\n"
-    "./tree les-arbres.csv output.txt\n");
+    "./tree i- les-arbres.csv o- output.txt -p\n");
 }
 
 
@@ -58,7 +60,7 @@ void parseArgs(int argc,  char **argv, options_t *options) {
     init_options(options);
 
     int c;
-    while ((c = getopt (argc, argv, "hpd:i:o:")) != -1) 
+    while ((c = getopt (argc, argv, "hpd:i:o:t:")) != -1) 
     {
         switch (c)
         {
@@ -74,6 +76,13 @@ void parseArgs(int argc,  char **argv, options_t *options) {
             case 'd':
                 options->action = ACTION_DJKSTRA;
                 options->src_tree = atoi(optarg);
+                break;
+            case 't':
+                if (options->action != ACTION_DJKSTRA) {
+                    print_usage();
+                    abort();
+                }
+                options->dst_tree = atoi(optarg);
                 break;
             case 'h':
                 print_usage(); 
@@ -105,13 +114,13 @@ void parseArgs(int argc,  char **argv, options_t *options) {
 
 int action_parsage(options_t *options){
     
-    int exitCode = parse_csv( options->inputFile, options->outputFile, options->tree_tab); 
+    int nbr_node = parse_csv( options->inputFile, options->outputFile, options->tree_tab); 
     
-    if(exitCode != PARSAGE_OK) 
+    if(nbr_node <= 0) 
     {
-        fprintf(stderr, "error while parsing %i\n", exitCode);
+        fprintf(stderr, "error while parsing \n");
     }
-    return exitCode;
+    return nbr_node;
 }
 
 
@@ -143,7 +152,7 @@ void init_options(options_t *options){
     options->outputFilename = NULL;
     options->inputFile = NULL;
     options->outputFile = NULL;
-    options->tree_tab = malloc(NBR_NODE * sizeof(TreeNode));
+    options->tree_tab = calloc(NBR_NODE ,sizeof(TreeNode));
     if ( !options->tree_tab ) {
 
         fprintf(stderr, "Error: malloc failed for tree_tab\n");

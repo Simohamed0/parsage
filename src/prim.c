@@ -6,12 +6,12 @@
 // A utility function to find the vertex with
 // minimum key value, from the set of vertices
 // not yet included in MST
-int minKey(int *key, int *mstSet) {
+int minKey(int *key, int *mstSet ,int nbr_node) {
 	
 	// Initialize min value
 	int min = INT_MAX, min_index;
 
-	for (int v = 0; v < MAX_EDGE-1; v++)
+	for (int v = 0; v < nbr_node-1; v++)
 		if (mstSet[v] == 0 && key[v] < min)
 			min = key[v], min_index = v;
 
@@ -21,10 +21,10 @@ int minKey(int *key, int *mstSet) {
 
 // A utility function to print the
 // constructed MST stored in parent[]
-void printMST(int *parent,int *parent_aux, TreeNode *tab_tree, FILE *fd) {
+void printMST(int *parent,int *parent_aux, TreeNode *tab_tree, FILE *fd , int nbr_node) {
     
 	fprintf(fd,"Edge\t\t\t\tWeight\n");
-    for (int i = 1; i < MAX_EDGE - 1  ; i++)
+    for (int i = 1; i < nbr_node - 1  ; i++)
         if ( parent[i] != 0 && tab_tree[i].id > 0 )
 		{    
 			double dis = distance(tab_tree[i].x,tab_tree[parent_aux[i]].x,tab_tree[i].y,tab_tree[parent_aux[i]].y);
@@ -44,20 +44,20 @@ void printMST(int *parent,int *parent_aux, TreeNode *tab_tree, FILE *fd) {
 *
 * @return : The minimum spanning tree
 */
-int primMST(TreeNode *tab_tree, FILE *fd)
+int primMST(TreeNode *tab_tree, int nbr_node ,FILE *fd)
 {
 	// Array to store constructed MST
-	int *parent = calloc(MAX_EDGE,sizeof(int));
-	int *parent_aux = calloc(MAX_EDGE,sizeof(int));
+	int *parent = calloc(nbr_node,sizeof(int));
+	int *parent_aux = calloc(nbr_node,sizeof(int));
     
 	// Key values used to pick minimum weight edge in cut
-	int *key=calloc(MAX_EDGE,sizeof(int));
+	int *key=calloc(nbr_node,sizeof(int));
     
 	// To represent set of vertices included in MST
-	int *mstSet = calloc(MAX_EDGE,sizeof(int));
+	int *mstSet = calloc(nbr_node,sizeof(int));
 
 	// Initialize all keys as INFINITE
-	for (int i = 0; i < MAX_EDGE; i++) {
+	for (int i = 0; i < nbr_node; i++) {
 		
         key[i] = INT_MAX ;
         mstSet[i] = 0;
@@ -72,10 +72,10 @@ int primMST(TreeNode *tab_tree, FILE *fd)
 	double dis = 0.0;
 
 	// The MST will have V vertices
-	for (int count = 0; count < MAX_EDGE - 1; count++) {
+	for (int count = 0; count < nbr_node - 1; count++) {
 		// Pick the minimum key vertex from the
 		// set of vertices not yet included in MST
-		int u = minKey(key, mstSet);
+		int u = minKey(key, mstSet , nbr_node);
 
 		// Add the picked vertex to the MST Set
 		mstSet[u] = true;
@@ -84,7 +84,7 @@ int primMST(TreeNode *tab_tree, FILE *fd)
 		// the adjacent vertices of the picked vertex.
 		// Consider only those vertices which are not
 		// yet included in MST
-		for (int v = 0; v < MAX_EDGE ; v++)
+		for (int v = 0; v < nbr_node ; v++)
 		{
 	
 			if( u == v ) {
@@ -104,7 +104,7 @@ int primMST(TreeNode *tab_tree, FILE *fd)
 			}
 		}
 	}
-	printMST(parent,parent_aux,tab_tree,fd);
+	printMST(parent,parent_aux,tab_tree, fd , nbr_node);
 	
 	free(parent);
 	free(parent_aux);

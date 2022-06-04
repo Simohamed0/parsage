@@ -41,27 +41,36 @@ coloredEcho "OK" green
 
 
 
-annoncer "Test 2 "
-$VALGRIND ./$TARGET  > tests/test2/sortieTest2 2>&1 || fail
+annoncer "Test 2 prim sur data_test"
+$VALGRIND ./$TARGET -i data_test.csv -o tests/test2/sortieTest2 -p 2>&1 || fail
 echo "===DIFF===" >> $LOG
-diff -Z tests/test2/sortieTest2 tests/test2/sortieAttendueTest2 >> $LOG 2>&1 
+diff -Z tests/test2/sortieTest2 tests/test2/sortie_attendu2 >> $LOG 2>&1 
 if [ $? -ne 0 ]
 then
     fail
 fi
 coloredEcho "OK" green
 
-annoncer "Test 3"
-$VALGRIND ./$TARGET -i tests/fichier100Klignes -o fichierBinaire -p "Sandra Heiler" -p "Mark F. Hornick" > tests/test3/sortieTest3 2>&1 || fail
+annoncer "Test 3 djikstra from source 3"
+$VALGRIND ./$TARGET -i data_test.csv -o tests/test3/sortieTest3 -d 3 2>&1 || fail
 echo "===DIFF===" >> $LOG
-diff -Z tests/test3/sortieTest3 tests/test3/sortieAttendueTest3 >> $LOG 2>&1 
+diff -Z tests/test3/sortieTest3 tests/test3/sortie_attendue3 >> $LOG 2>&1 
 if [ $? -ne 0 ]
 then
     fail
 fi
 coloredEcho "OK" green
 
-#sortie du test 2 est non nulle car les deux auteurs appartiennent à des composantes connexes disjointes pendant l'année 1993
+annoncer "Test 4 prim sur tout le fichier un peu long.."
+$VALGRIND ./$TARGET -i les-arbres.csv -o tests/test4/sortieTest4 -p 2>&1 || fail
+echo "===DIFF===" >> $LOG
+diff -Z tests/test4/sortieTest4 tests/test4/sortie_attendu4 >> $LOG 2>&1 
+if [ $? -ne 0 ]
+then
+    fail
+fi
+coloredEcho "OK" green
+
 
 annoncer "Test 4"
 $VALGRIND ./$TARGET -i tests/fichier100Klignes -o fichierBinaire -p "Sandra Heiler" -p "Mark F. Hornick" -y 1993 > tests/test4/sortieTest4 2>&1 || fail
@@ -69,7 +78,7 @@ echo "===DIFF===" >> $LOG
 diff -Z tests/test4/sortieTest4 tests/test4/sortieAttendueTest4 >> $LOG 2>&1 
 if [ $? -ne 0 ]
 then
-    fail
+    fail 
 fi
 coloredEcho "OK" green
 

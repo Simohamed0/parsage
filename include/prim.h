@@ -9,10 +9,10 @@
 
 
 
-int minKey(int *key, int *mstSet);
+int minKey(int *key, int *mstSet , int nbr_node);
 
-void printMST(int *parent,int *parent_aux, TreeNode *tab_tree,FILE *fd);
+void printMST(int *parent,int *parent_aux, TreeNode *tab_tree,FILE *fd , int nbr_node);
 
-int primMST(TreeNode *tab_tree,FILE *fd);
+int primMST(TreeNode *tab_tree, int nbr_node ,FILE *fd);
 
 

@@ -87,7 +87,7 @@ int parse_csv(FILE *src, FILE *dst, TreeNode *tab_tree){
         i++;
     }
     
-    return PARSAGE_OK;
+    return i;
 }
 
 

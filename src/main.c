@@ -32,15 +32,15 @@ int main(int argc, char *argv[]){
         fprintf(stderr, "error while parsing %i\n", exitCode);
     }
 
-    action_parsage(&options);
+    int nbr_node = action_parsage(&options);
 
     switch(options.action) {
     
         case ACTION_MST:
-            exitCode = primMST(options.tree_tab, options.outputFile);
+            exitCode = primMST(options.tree_tab, nbr_node, options.outputFile);
             break;
         case ACTION_DJKSTRA:
-            Dijkstra(options.tree_tab, options.src_tree, options.outputFile);
+            Dijkstra(options.tree_tab, options.src_tree, options.outputFile ,nbr_node);
             break;
         case ACTION_UNKNOWN:
             //fprintf(stderr, "action is missing\n");
