@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jun  4 01:22:32 2022
+# Make data base, printed on Sat Jun  4 18:52:37 2022
 
 # Variables
 
@@ -55,7 +57,7 @@ _ = /usr/share/code/code
 # makefile (from 'Makefile', line 2)
 CFLAGS = -Wall -Wextra -Werror -Wformat -g 
 # environment
-JOURNAL_STREAM = 8:52423
+JOURNAL_STREAM = 8:43999
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -79,7 +81,7 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 1429
+MANAGERPID = 1444
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -95,7 +97,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 GJS_DEBUG_OUTPUT = stderr
 # environment
-SESSION_MANAGER = local/AymanePC:@/tmp/.ICE-unix/1642,unix/AymanePC:/tmp/.ICE-unix/1642
+SESSION_MANAGER = local/AymanePC:@/tmp/.ICE-unix/1661,unix/AymanePC:/tmp/.ICE-unix/1661
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -105,7 +107,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 505cd58c3dcb45c3919de4c8028a835f
+INVOCATION_ID = ebd5b81cc05e436f8e77db9f6e24a52d
 # makefile (from 'Makefile', line 3)
 LDLIBS = -lm 
 # default
@@ -117,7 +119,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 10163
+GIO_LAUNCHED_DESKTOP_FILE_PID = 10958
 # automatic
 %F = $(notdir $%)
 # environment
@@ -131,7 +133,7 @@ PWD = /home/aymane/parsage
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1604
+SSH_AGENT_PID = 1622
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -149,7 +151,7 @@ VSCODE_CODE_CACHE_PATH = /home/aymane/.config/Code/CachedData/c3511e6c69bb39013c
 # environment
 LOGNAME = aymane
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # automatic
 +F = $(notdir $+)
 # environment
@@ -175,7 +177,7 @@ CC = gcc
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-36b56315-735d-4100-be85-4a185bfc7501.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-040c4d11-3eb3-4709-96db-2b5254a4b472.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -255,9 +257,9 @@ LC_ADDRESS = fr_FR.UTF-8
 # environment
 LANG = C
 # environment
-VSCODE_PID = 10163
+VSCODE_PID = 10958
 # variable set hash-table stats:
-# Load=123/1024=12%, Rehash=0, Collisions=28/182=15%
+# Load=123/1024=12%, Rehash=0, Collisions=28/165=17%
 
 # Pattern-specific Variable Values
 
@@ -279,6 +281,7 @@ VSCODE_PID = 10163
 
 bin/tree: obj/lib.o obj/arg-parser.o obj/parsing.o obj/graphe.o obj/main.o obj/prim.o obj/djikstra.o
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 18):
@@ -294,7 +297,6 @@ obj/prim.o: src/prim.c include/parsing.h include/graphe.h include/args-parser.h 
 #  recipe to execute (from 'Makefile', line 23):
 	mkdir -p $(OBJDIR)
 	$(CC) -o $@ -c $< $(CFLAGS) -I$(INCLUDE_PATH)
- 
 
 # Not a target:
 src/arg-parser.c:
@@ -308,14 +310,12 @@ cov:
 #  File does not exist.
 #  File has not been updated.
 
-all: release
+# Not a target:
+all:
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/9=0%
+#  File has not been updated.
 
 .PHONY: clean cov valgrind cov
 #  Implicit rule search has not been done.
@@ -344,12 +344,6 @@ obj/main.o: src/main.c include/parsing.h include/graphe.h include/args-parser.h 
 	$(CC) -o $@ -c $< $(CFLAGS) -I$(INCLUDE_PATH)
 
 # Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
 include/prim.h:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -364,20 +358,9 @@ src/prim.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-01 14:24:58
+#  Last modified 2022-06-04 15:20:44.180256896
 #  File has been updated.
 #  Successfully updated.
-
-# makefile (from 'Makefile', line 31)
-debug: CFLAGS += -Og -DDEBUG -g
-debug: clean bin/tree
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-# variable set hash-table stats:
-# Load=1/32=3%, Rehash=0, Collisions=0/2=0%
-#  recipe to execute (from 'Makefile', line 33):
-	@echo "\033[33mRunning in debug mode!\033[0m"
 
 obj/parsing.o: src/parsing.c include/parsing.h include/graphe.h include/args-parser.h include/io-utils.h include/prim.h include/djikstra.h include/tps_unit_test.h include/lib.h
 #  Implicit rule search has not been done.
@@ -387,6 +370,15 @@ obj/parsing.o: src/parsing.c include/parsing.h include/graphe.h include/args-par
 #  recipe to execute (from 'Makefile', line 23):
 	mkdir -p $(OBJDIR)
 	$(CC) -o $@ -c $< $(CFLAGS) -I$(INCLUDE_PATH)
+
+timing:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 54):
+	--timing
+	--log-file=timing-out.txt
+	./bin/tree -i les-arbres.csv o- output_test.csv -p
 
 # Not a target:
 include/io-utils.h:
@@ -434,6 +426,7 @@ obj/djikstra.o: src/djikstra.c include/parsing.h include/graphe.h include/args-p
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 
 # Not a target:
@@ -452,51 +445,19 @@ run:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 41):
+#  recipe to execute (from 'Makefile', line 32):
 	./$(PATH_TO_EXE)
 
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := clean
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := 
-# automatic
-# | := 
-# automatic
-# < := 
-# automatic
-# ^ := 
-# automatic
-# ? := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/17=12%
-#  recipe to execute (from 'Makefile', line 48):
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 39):
 	rm -f $(OBJDIR)/*.o
 	rm -f $(OBJDIR)/*.gcda
 	rm -f $(OBJDIR)/*.gcno
 	rm -f $(PATH_TO_EXE)
-
-# makefile (from 'Makefile', line 35)
-release: CFLAGS += -Ofast
-release: clean bin/tree
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=1/32=3%, Rehash=0, Collisions=1/11=9%
-#  recipe to execute (from 'Makefile', line 37):
-	@echo "\033[36mRunning in release mode!\033[0m"
 
 obj/arg-parser.o: src/arg-parser.c include/parsing.h include/graphe.h include/args-parser.h include/io-utils.h include/prim.h include/djikstra.h include/tps_unit_test.h include/lib.h
 #  Implicit rule search has not been done.
@@ -536,7 +497,7 @@ valgrind:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 55):
+#  recipe to execute (from 'Makefile', line 46):
 	--leak-check=full 
 	--show-leak-kinds=all
 	--track-origins=yes
@@ -554,19 +515,19 @@ obj/lib.o: src/lib.c include/parsing.h include/graphe.h include/args-parser.h in
 	$(CC) -o $@ -c $< $(CFLAGS) -I$(INCLUDE_PATH)
 
 # files hash-table stats:
-# Load=34/1024=3%, Rehash=0, Collisions=4/139=3%
+# Load=33/1024=3%, Rehash=0, Collisions=0/127=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 82 / storage = 849 B / avg = 10 B
-# current buf: size = 8162 B / used = 849 B / count = 82 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 81 / storage = 840 B / avg = 10 B
+# current buf: size = 8162 B / used = 840 B / count = 81 / avg = 10 B
 
-# strcache performance: lookups = 128 / hit rate = 35%
+# strcache performance: lookups = 115 / hit rate = 29%
 # hash-table stats:
-# Load=82/8192=1%, Rehash=0, Collisions=4/128=3%
-# Finished Make data base on Sat Jun  4 01:22:32 2022
+# Load=81/8192=1%, Rehash=0, Collisions=4/115=3%
+# Finished Make data base on Sat Jun  4 18:52:37 2022
 
  

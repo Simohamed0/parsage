@@ -6,7 +6,7 @@
 #include <string.h>
 #include "io-utils.h"
 
-#define NBR_NODE 206000
+#define NBR_NODE 205756
 
 
 typedef struct TreeNode{
@@ -45,6 +45,5 @@ void string_insert(char *src,char *dst ,char x, int loc);
  * @param tree_struct data structure to save the information
  */
 int parse_csv(FILE *src, FILE *dst , TreeNode *tab_tree); 
-
 
 #endif 

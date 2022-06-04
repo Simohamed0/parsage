@@ -26,15 +26,6 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c $(INCLUDES)
 
 PATH_TO_EXE = $(BINDIR)/$(TARGET)
 
-all : release
-
-debug: CFLAGS += -Og -DDEBUG -g
-debug: clean $(PATH_TO_EXE)
-	@echo "\033[33mRunning in debug mode!\033[0m"
-
-release: CFLAGS += -Ofast
-release: clean $(PATH_TO_EXE)
-	@echo "\033[36mRunning in release mode!\033[0m"
 
 run:
 ifneq ("$(wildcard $(PATH_TO_EXE))", "")
@@ -58,3 +49,8 @@ valgrind:
 	--verbose
 	--log-file=valgrind-out.txt
 	./executable data_test.csv output_test.csv
+
+timing: 
+	--timing
+	--log-file=timing-out.txt
+	./bin/tree -i les-arbres.csv o- output_test.csv -p

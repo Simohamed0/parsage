@@ -43,8 +43,8 @@ int main(int argc, char *argv[]){
             Dijkstra(options.tree_tab, options.src_tree, options.outputFile);
             break;
         case ACTION_UNKNOWN:
-            fprintf(stderr, "action is missing\n");
-            exitCode = 4;
+            //fprintf(stderr, "action is missing\n");
+            //exitCode = 4;
             break;
     }
     

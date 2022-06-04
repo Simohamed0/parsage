@@ -1,9 +1,6 @@
 #include "djikstra.h"
 
-
-
 #define INFINIE 999999999
-
 
 
 void Dijkstra(TreeNode *tab_tree, int startId, FILE *file) {

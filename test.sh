@@ -9,6 +9,11 @@ TESTDIR="$(cd "$(dirname "$0}")" && pwd)"
 cd "$TESTDIR"
 
 #
+# importer les fonctions definies dans fonctions.sh
+#
+. ./fonctions.sh
+
+#
 # Conserver une trace de toutes les actions
 #
 LOG="test.log"
@@ -23,20 +28,21 @@ make clean
 make $TARGET >> $LOG 2>&1 || fail
 coloredEcho "OK" green
 
-annoncer "Test 1  parsage "
-$VALGRIND ./$TARGET -i les-arbres.csv -o output.csv  
+
+annoncer "Test 1  parsage du fichier "
+$VALGRIND ./$TARGET -i les-arbres.csv -o tests/test1/sortieTest 
 echo "===DIFF===" >> $LOG
-diff -Z output.csv tests/test1/sortie_attendue >> $LOG 2>&1 
+diff -Z tests/test1/sortie_attendue tests/test1/sortieTest >> $LOG 2>&1 
 if [ $? -ne 0 ]
 then
     fail
 fi
 coloredEcho "OK" green
 
-#sortie du test 2 est non nulle car les deux auteurs appartiennent à des composantes connexes disjointes
 
-annoncer "Test 2"
-$VALGRIND ./$TARGET -i tests/fichier100Klignes -o fichierBinaire -p "Paul Kocher" -p "Frank Manola" > tests/test2/sortieTest2 2>&1 || fail
+
+annoncer "Test 2 "
+$VALGRIND ./$TARGET  > tests/test2/sortieTest2 2>&1 || fail
 echo "===DIFF===" >> $LOG
 diff -Z tests/test2/sortieTest2 tests/test2/sortieAttendueTest2 >> $LOG 2>&1 
 if [ $? -ne 0 ]
